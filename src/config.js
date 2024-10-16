@@ -4,19 +4,16 @@ const config = {
             'id': 'HG0',
             'name': 'Genshin Impact',
             'enable': false,
-            'last_date': null,
         },
         'HG1': {
             'id': 'HG1',
             'name': 'Hokai Star Rail',
             'enable': false,
-            'last_date': null,
         },
         'HG2': {
             'id': 'HG2',
             'name': 'Zenless Zone Zero',
             'enable': false,
-            'last_date': null,
         },
     },
 }
