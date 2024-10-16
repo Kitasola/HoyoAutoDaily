@@ -2,5 +2,15 @@
     "name": "HoyoAutoDaily",
     "description": "Automatically get Hoyoverse web daily",
     "version": "0.0.0",
-    "manifest_version": 3
+    "manifest_version": 3,
+    "icons": {
+        "128": "icon128.png"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "action": {
+        "default_icon": "icon128.png",
+        "default_popup": "index.html"
+    }
 }
