@@ -1,3 +1,4 @@
+import { changeEnableGame } from './config';
 import { getGamesInfo } from './config'
 
 
@@ -6,12 +7,17 @@ window.addEventListener('load', async () => {
 
     const parent = document.querySelector('.enable-game')
 
-    for (const game of games_info) {
+    for (const game of Object.values(games_info)) {
         let input_data = document.createElement('input')
         input_data.type = 'checkbox'
         input_data.id = game.id
         input_data.name = 'enable_game'
-        input_data.checked = false
+        input_data.checked = game.enable
+        input_data.addEventListener('change', (e) => {
+            const input = e.target
+            changeEnableGame(input.id, input.checked)
+        })
+
 
         let label_data = document.createElement('label')
         label_data.className = 'checkbox'

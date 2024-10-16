@@ -1,24 +1,24 @@
 const config = {
-    "games_info": [
-        {
-            "id": "HG0",
-            "name": "Genshin Impact",
-            "enable": false,
-            "last_date": null
+    'games_info': {
+        'HG0': {
+            'id': 'HG0',
+            'name': 'Genshin Impact',
+            'enable': false,
+            'last_date': null,
         },
-        {
-            "id": "HG1",
-            "name": "Hokai Star Rail",
-            "enable": false,
-            "last_date": null
+        'HG1': {
+            'id': 'HG1',
+            'name': 'Hokai Star Rail',
+            'enable': false,
+            'last_date': null,
         },
-        {
-            "id": "HG2",
-            "name": "Zenless Zone Zero",
-            "enable": false,
-            "last_date": null
-        }
-    ]
+        'HG2': {
+            'id': 'HG2',
+            'name': 'Zenless Zone Zero',
+            'enable': false,
+            'last_date': null,
+        },
+    },
 }
 
 export const getGamesInfo = async () => {
@@ -32,4 +32,10 @@ export const getGamesInfo = async () => {
     }
 
     return data.games_info
+};
+
+export const changeEnableGame = async (id, enable) => {
+    const games_info = await getGamesInfo()
+    games_info[id].enable = (enable === true)
+    await chrome.storage.sync.set({ 'games_info': games_info, })
 };
