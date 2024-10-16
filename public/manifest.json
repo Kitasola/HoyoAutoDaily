@@ -1,3 +1,6 @@
 {
-    "name":
+    "name": "HoyoAutoDaily",
+    "description": "Automatically get Hoyoverse web daily",
+    "version": "0.0.0",
+    "manifest_version": 3
 }
