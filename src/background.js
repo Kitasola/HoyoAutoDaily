@@ -15,7 +15,7 @@ const check = async () => {
     if (now.toDateString() != lastdate && old < now) {
         await updateLastdate()
         chrome.tabs.create({
-            url: "https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481",
+            url: 'https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481',
             active: false,
         })
         logger.info('open web bonus page')
