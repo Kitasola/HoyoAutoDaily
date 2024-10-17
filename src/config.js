@@ -1,3 +1,5 @@
+import logger from './utils/logger'
+
 const config = {
     'games_info': {
         'HG0': {
@@ -23,7 +25,7 @@ export const getGamesInfo = async () => {
         .catch(() => { })
 
     if ('games_info' in data == false) {
-        console.log('not found games_info.')
+        logger.info('not found games_info')
         await chrome.storage.sync.set({ 'games_info': config.games_info })
         return config.games_info
     }
@@ -35,4 +37,5 @@ export const changeEnableGame = async (id, enable) => {
     const games_info = await getGamesInfo()
     games_info[id].enable = (enable === true)
     await chrome.storage.sync.set({ 'games_info': games_info, })
+    logger.info(`${games_info[id].name}'s info change ${games_info[id].enable}`)
 };
