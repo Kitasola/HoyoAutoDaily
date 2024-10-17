@@ -7,7 +7,9 @@
         "128": "icon128.png"
     },
     "permissions": [
-        "storage"
+        "storage",
+        "background",
+        "alarms"
     ],
     "action": {
         "default_icon": "icon128.png",
@@ -23,5 +25,8 @@
             ],
             "run-at": "document_end"
         }
-    ]
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
 }
