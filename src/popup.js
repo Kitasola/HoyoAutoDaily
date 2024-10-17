@@ -1,6 +1,4 @@
-import { changeEnableGame } from './config';
-import { getGamesInfo } from './config'
-
+import { changeEnableGame, getGamesInfo } from './config';
 
 window.addEventListener('load', async () => {
     const games_info = await getGamesInfo()
