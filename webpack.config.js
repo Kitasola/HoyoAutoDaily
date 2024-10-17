@@ -5,6 +5,7 @@ const config = {
     mode: 'production',
     entry: {
         popup: './src/popup.js',
+        content: './src/content.js'
     },
     output: {
         path: path.join(__dirname, 'dist'),
