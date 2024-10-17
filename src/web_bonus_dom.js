@@ -40,25 +40,4 @@ export class WebBonusDOM {
             }, 100)
         })
     }
-
-    // 
-    waitForSignInList() {
-        return new Promise((resolve) => {
-            const ob = new MutationObserver(() => {
-                const el = document.querySelector(
-                    'div[class*=components-home-assets-__sign-content_---sign-list]'
-                )
-
-                if (el.children.length) {
-                    ob.disconnect()
-                    resolve(el)
-                }
-            })
-
-            ob.observe(document.documentElement, {
-                subtree: true,
-                childList: true,
-            })
-        })
-    }
 }
