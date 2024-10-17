@@ -61,26 +61,4 @@ export class WebBonusDOM {
             })
         })
     }
-
-    // async watchSignInList() {
-    //     const ob = new MutationObserver(this.dailySignIn)
-    //     const signInList = await this.waitForSignInList()
-
-    //     ob.observe(signInList, {
-    //         subtree: true,
-    //         childList: true,
-    //     })
-    // }
-
-    // async watchMissSignIn() {
-    //     console.log('watch...')
-    //     const ob = new MutationObserver(() => {
-    //         console.log('watch misssign')
-    //     })
-
-    //     ob.observe(document.documentElement, {
-    //         subtree: true,
-    //         childList: true,
-    //     })
-    // }
 }
