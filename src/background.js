@@ -1,7 +1,7 @@
 import logger from './utils/logger'
-import { getLastdate, getCheckInTime, updateLastdate, changeCheckInTime, getGamesInfo } from './config'
+import { getLastdate, getCheckInTime, updateLastdate, updateGameURL, getGamesInfo } from './config'
 
-// 
+// 定期実行処理
 const check = async () => {
     const lastdate = await getLastdate()
     const { hour: h, minutes: m } = await getCheckInTime()
@@ -13,12 +13,19 @@ const check = async () => {
 
     // チェックイン時刻以降にログインボーナスページを開く
     if (now.toDateString() != lastdate && old < now) {
-        await updateLastdate()
-        chrome.tabs.create({
-            url: 'https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481',
-            active: false,
-        })
-        logger.info('open web bonus page')
+        const games_info = await getGamesInfo()
+        for (const game of Object.values(games_info)) {
+            // 有効ゲームのみ開く
+            if (game.enable && game.url != null) {
+                await updateLastdate()
+                chrome.tabs.create({
+                    url: game.url,
+                    active: false,
+                })
+                logger.info(`open ${game.id} web bonus page`)
+            }
+        }
+
     }
     logger.info('finish check')
 }
@@ -34,6 +41,9 @@ chrome.runtime.onMessage.addListener((message, sender) => {
         });
     }
 })
+
+// games_info.urlの更新
+updateGameURL()
 
 // chrome.alarmsに定期タスクとして登録
 chrome.alarms.create({ periodInMinutes: 1 })

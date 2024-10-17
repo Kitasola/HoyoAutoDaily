@@ -6,16 +6,19 @@ const config = {
             'id': 'HG0',
             'name': 'Genshin Impact',
             'enable': false,
+            'url': null,
         },
         'HG1': {
             'id': 'HG1',
             'name': 'Hokai Star Rail',
             'enable': false,
+            'url': null,
         },
         'HG2': {
             'id': 'HG2',
             'name': 'Zenless Zone Zero',
             'enable': false,
+            'url': null,
         },
     },
     'lastdate': new Date(0).toDateString(),
@@ -84,4 +87,23 @@ export const changeCheckInTime = async (h, m) => {
         },
     })
     logger.info(`check in time change "${h}:${m}"`)
+}
+
+export const updateGameURL = async () => {
+    const manifest = chrome.runtime.getManifest()
+    const games_info = await getGamesInfo()
+
+    for (const game of Object.values(games_info)) {
+        const target = manifest.content_scripts.find(
+            (script) => script.js.some(
+                (file) => file.includes(game.id)
+            )
+        )
+        if (target) {
+            games_info[game.id].url = target.matches[0]
+        }
+    }
+
+    await chrome.storage.sync.set({ 'games_info': games_info, })
+    logger.info(`update games_info url`)
 }
