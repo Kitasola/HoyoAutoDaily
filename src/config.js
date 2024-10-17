@@ -18,7 +18,7 @@ const config = {
             'enable': false,
         },
     },
-    'lastdate': new Date(0).getDate(),
+    'lastdate': new Date(0).toDateString(),
     'check_in_time': {
         'hour': 1,
         'minutes': 5
@@ -59,7 +59,7 @@ export const getLastdate = async () => {
 };
 
 export const updateLastdate = async () => {
-    await chrome.storage.sync.set({ 'lastdate': new Date().getDate(), })
+    await chrome.storage.sync.set({ 'lastdate': new Date().toDateString(), })
     logger.info('update lastdate')
 }
 

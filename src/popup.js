@@ -1,10 +1,22 @@
-import { changeEnableGame, getGamesInfo } from './config';
+import { getLastdate, changeEnableGame, getGamesInfo } from './config';
 
 window.addEventListener('load', async () => {
+    // YYYY/MM/DD変換
+    const lastdate = new Date(await getLastdate())
+        .toLocaleDateString("ja-JP", {
+            year: "numeric", month: "2-digit",
+            day: "2-digit"
+        })
     const games_info = await getGamesInfo()
 
-    const parent = document.querySelector('.enable-game')
+    // 最終ログイン日時
+    const parent_status_board = document.querySelector('.status-board')
+    let last_login_date = document.createElement('a')
+    last_login_date.textContent = `最終ログイン日時 ${lastdate}`
+    parent_status_board.appendChild(last_login_date)
 
+    // ゲーム一覧
+    const parent_enable_game = document.querySelector('.enable-game')
     for (const game of Object.values(games_info)) {
         let input_data = document.createElement('input')
         input_data.type = 'checkbox'
@@ -16,7 +28,6 @@ window.addEventListener('load', async () => {
             changeEnableGame(input.id, input.checked)
         })
 
-
         let label_data = document.createElement('label')
         label_data.className = 'checkbox'
         label_data['for'] = game.id
@@ -24,6 +35,6 @@ window.addEventListener('load', async () => {
         label_data.indeterminate = true
         label_data.prepend(input_data)
 
-        parent.appendChild(label_data)
+        parent_enable_game.appendChild(label_data)
     }
 });
