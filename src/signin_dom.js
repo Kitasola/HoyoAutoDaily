@@ -1,3 +1,5 @@
+import logger from './utils/logger'
+
 export class SignInDOM {
     // ログインボーナスグリッドの取得
     getSignItems() {
@@ -16,8 +18,10 @@ export class SignInDOM {
     async dailySignIn() {
         const items = await this.getSignItems()
         const target = items.find((el) => el.className.includes('sign-wrapper'))
-        console.log('daily sign in')
-        // target.click()
+        if (target) {
+            logger.info('daily singin success')
+            // target.click()
+        }
     }
 
     // "さらに表示"の展開
