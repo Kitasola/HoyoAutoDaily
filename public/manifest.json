@@ -40,7 +40,7 @@
                 "https://act.hoyolab.com/bbs/event/signin/zzz/index.html?act_id=e202406031448091"
             ],
             "js": [
-                "conten_HG2.js"
+                "content_HG2.js"
             ],
             "run-at": "document_end"
         }
