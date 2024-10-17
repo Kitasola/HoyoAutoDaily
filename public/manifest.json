@@ -22,7 +22,7 @@
                 "https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481"
             ],
             "js": [
-                "content.js"
+                "content_HG0.js"
             ],
             "run-at": "document_end"
         }

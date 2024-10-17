@@ -5,7 +5,7 @@ const config = {
     mode: 'production',
     entry: {
         popup: './src/popup.js',
-        content: './src/content.js',
+        content_HG0: './src/HG0/content.js',
         background: './src/background.js',
     },
     output: {
