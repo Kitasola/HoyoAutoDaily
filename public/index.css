@@ -1,0 +1,30 @@
+body {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 300px;
+    background-color: white;
+    border: 1px solid gray;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.status-board {}
+
+.setting-board {}
+
+.enable-game {
+    width: fit-content;
+    font-size: 14px;
+}
+
+.enable-game input {
+    vertical-align: middle;
+}
+
+.checkbox {
+    display: block;
+}
