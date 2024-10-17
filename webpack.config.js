@@ -6,6 +6,8 @@ const config = {
     entry: {
         popup: './src/popup.js',
         content_HG0: './src/HG0/content.js',
+        content_HG1: './src/HG1/content.js',
+        content_HG2: './src/HG2/content.js',
         background: './src/background.js',
     },
     output: {

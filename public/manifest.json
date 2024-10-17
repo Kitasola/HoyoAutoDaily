@@ -25,6 +25,24 @@
                 "content_HG0.js"
             ],
             "run-at": "document_end"
+        },
+        {
+            "matches": [
+                "https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311"
+            ],
+            "js": [
+                "content-HG1.js"
+            ],
+            "run-at": "document_end"
+        },
+        {
+            "matches": [
+                "https://act.hoyolab.com/bbs/event/signin/zzz/index.html?act_id=e202406031448091"
+            ],
+            "js": [
+                "content-HG2.js"
+            ],
+            "run-at": "document_end"
         }
     ],
     "background": {
