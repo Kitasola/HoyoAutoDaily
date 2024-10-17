@@ -1,7 +1,7 @@
 {
     "name": "HoyoAutoDaily",
     "description": "Automatically get Hoyoverse web daily",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "manifest_version": 3,
     "icons": {
         "128": "icon128.png"
