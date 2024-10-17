@@ -2,7 +2,7 @@ import logger from './utils/logger'
 
 export class SignInDOM {
     // ログインボーナスグリッドの取得
-    getSignItems() {
+    async getSignItems() {
         return new Promise((resolve) => {
             setInterval(() => {
                 const dom = document.querySelectorAll('div[class*=components-home-assets-__sign-content-test_---sign-list] > div')
@@ -19,7 +19,7 @@ export class SignInDOM {
         const items = await this.getSignItems()
         const target = items.find((el) => el.className.includes('sign-wrapper'))
         if (target) {
-            logger.info('daily singin success')
+            logger.info('daily sing in success')
             // target.click()
         }
     }
