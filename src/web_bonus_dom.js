@@ -20,7 +20,7 @@ export class WebBonusDOM {
         const target = items.find((el) => el.className.includes('sign-wrapper'))
         if (target) {
             logger.info('daily sing in success')
-            // target.click()
+            target.click()
         }
     }
 
