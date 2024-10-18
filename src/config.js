@@ -34,7 +34,7 @@ export const getGamesInfo = async () => {
         .catch(() => { })
 
     if ('games_info' in data == false) {
-        logger.info('not found games_info')
+        logger.debug('not found games_info')
         await chrome.storage.sync.set({ 'games_info': config.games_info })
         return config.games_info
     }
@@ -46,7 +46,7 @@ export const changeEnableGame = async (id, enable) => {
     const games_info = await getGamesInfo()
     games_info[id].enable = (enable === true)
     await chrome.storage.sync.set({ 'games_info': games_info, })
-    logger.info(`${games_info[id].name}'s info change ${games_info[id].enable}`)
+    logger.debug(`${games_info[id].name}'s info change ${games_info[id].enable}`)
 };
 
 export const getLastdate = async () => {
@@ -54,7 +54,7 @@ export const getLastdate = async () => {
         .catch(() => { })
 
     if ('lastdate' in data == false) {
-        logger.info('not found lastdate')
+        logger.debug('not found lastdate')
         await chrome.storage.sync.set({ 'lastdate': config.lastdate })
         return config.lastdate
     }
@@ -64,7 +64,7 @@ export const getLastdate = async () => {
 
 export const updateLastdate = async () => {
     await chrome.storage.sync.set({ 'lastdate': new Date().toDateString(), })
-    logger.info('update lastdate')
+    logger.debug('update lastdate')
 }
 
 export const getCheckInTime = async () => {
@@ -72,7 +72,7 @@ export const getCheckInTime = async () => {
         .catch(() => { })
 
     if ('check_in_time' in data == false) {
-        logger.info('not found check_in_time')
+        logger.debug('not found check_in_time')
         await chrome.storage.sync.set({ 'check_in_time': config.check_in_time })
         return config.check_in_time
     }
@@ -87,7 +87,7 @@ export const changeCheckInTime = async (h, m) => {
             'minutes': m,
         },
     })
-    logger.info(`check in time change "${h}:${m}"`)
+    logger.debug(`check in time change "${h}:${m}"`)
 }
 
 export const updateGameURL = async () => {
@@ -106,7 +106,7 @@ export const updateGameURL = async () => {
     }
 
     await chrome.storage.sync.set({ 'games_info': games_info, })
-    logger.info(`update games_info url`)
+    logger.debug(`update games_info url`)
 }
 
 export const getChecking = async () => {
@@ -114,7 +114,7 @@ export const getChecking = async () => {
         .catch(() => { })
 
     if ('checking' in data == false) {
-        logger.info('not found checking')
+        logger.debug('not found checking')
         await chrome.storage.sync.set({ 'checking': config.lastdate })
         return config.checking
     }
@@ -124,10 +124,10 @@ export const getChecking = async () => {
 
 export const onChecking = async () => {
     await chrome.storage.sync.set({ 'checking': true, })
-    logger.info('change checking')
+    logger.debug('change checking')
 }
 
 export const offChecking = async () => {
     await chrome.storage.sync.set({ 'checking': false, })
-    logger.info('change checking')
+    logger.debug('change checking')
 }

@@ -39,11 +39,11 @@ const check = async () => {
                     url: game.url,
                     active: false,
                 })
-                logger.info(`open ${game.id} web bonus page`)
+                logger.debug(`open ${game.id} web bonus page`)
             }
         }
 
-        logger.info('start check in')
+        logger.debug('start check in')
     } else if (status) {
         const games_info = await getGamesInfo()
         for (const game of Object.values(games_info)) {
@@ -58,9 +58,9 @@ const check = async () => {
                 });
             }
         }
-        logger.info('finish check in')
+        logger.debug('finish check in')
     }
-    logger.info('finish check')
+    logger.debug('finish check')
 }
 
 // // conten_script(content.js)からのメッセージ受信

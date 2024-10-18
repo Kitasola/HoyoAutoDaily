@@ -5,7 +5,7 @@ const logger = (level, message) => console.log(JSON.stringify({
     'timestamp': new Date(),
 }))
 
-export const debug = (message) => logger('Debug', message)
+export const debug = process.env.DEBUG ? (message) => logger('Debug', message) : (message) => { }
 export const info = (message) => logger('Info', message)
 export const warn = (message) => logger('Warn', message)
 export const error = (message) => logger('Error', message)
