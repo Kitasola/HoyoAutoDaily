@@ -4,17 +4,18 @@ export class WebBonusDOM {
     // ログインボーナスグリッドの取得
     async getBonusItems() {
         return new Promise((resolve) => {
-            setInterval(() => {
+            const interval_id = setInterval(() => {
                 const dom = document.querySelectorAll('div[class*=components-home-assets-__sign-content-test_---sign-list] > div')
 
                 if (dom) {
-                    resolve(Array.from(dom))
+                    clearInterval(interval_id)
+                    return resolve(Array.from(dom))
                 }
             }, 1000)
         })
     }
 
-    // 今日のボーナスを取得()
+    // 今日のボーナスを取得
     async dailyCheckIn() {
         const items = await this.getBonusItems()
         const target = items.find((el) => el.className.includes('sign-wrapper'))

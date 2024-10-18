@@ -4,23 +4,24 @@ export class WebBonusDOM {
     // ログインボーナスグリッドの取得
     async getBonusItems() {
         return new Promise((resolve) => {
-            setInterval(() => {
+            const interval_id = setInterval(() => {
                 const dom = document.querySelectorAll('div[class*=components-pc-assets-__prize-list_---list] > div')
 
                 if (dom) {
+                    clearInterval(interval_id)
                     resolve(Array.from(dom))
                 }
             }, 1000)
         })
     }
 
-    // 今日のボーナスを取得()
+    // 今日のボーナスを取得
     async dailyCheckIn() {
         const items = await this.getBonusItems()
         const target = items.find((item) => !Array.from(item.childNodes).some((el) => el.className.includes('components-pc-assets-__prize-list_---received')))
         if (target) {
             logger.info('daily sing in success')
-            target.click()
+            // target.click()
         }
     }
 
