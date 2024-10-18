@@ -22,6 +22,7 @@ const config = {
         },
     },
     'lastdate': new Date(0).toDateString(),
+    'checking': false,
     'check_in_time': {
         'hour': 1,
         'minutes': 5
@@ -106,4 +107,27 @@ export const updateGameURL = async () => {
 
     await chrome.storage.sync.set({ 'games_info': games_info, })
     logger.info(`update games_info url`)
+}
+
+export const getChecking = async () => {
+    const data = await chrome.storage.sync.get('checking')
+        .catch(() => { })
+
+    if ('checking' in data == false) {
+        logger.info('not found checking')
+        await chrome.storage.sync.set({ 'checking': config.lastdate })
+        return config.checking
+    }
+
+    return data.checking
+};
+
+export const onChecking = async () => {
+    await chrome.storage.sync.set({ 'checking': true, })
+    logger.info('change checking')
+}
+
+export const offChecking = async () => {
+    await chrome.storage.sync.set({ 'checking': false, })
+    logger.info('change checking')
 }
