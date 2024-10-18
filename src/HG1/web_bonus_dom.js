@@ -21,7 +21,7 @@ export class WebBonusDOM {
         const target = items.find((item) => !Array.from(item.childNodes).some((el) => el.className.includes('components-pc-assets-__prize-list_---received')))
         if (target) {
             logger.info('daily sing in success')
-            // target.click()
+            target.click()
         }
     }
 
