@@ -13,6 +13,7 @@ const config = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js',
+        clean: true,
     },
     plugins: [
         new CopyWebpackPlugin({
@@ -22,7 +23,7 @@ const config = {
                     to: './',
                 },
             ],
-        })
+        }),
     ]
 }
 
