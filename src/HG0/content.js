@@ -5,7 +5,7 @@ const start = async () => {
     await helper.dailyCheckIn()
 
     // 完了通知
-    chrome.runtime.sendMessage('finish')
+    // chrome.runtime.sendMessage('finish')
 }
 
 start()
