@@ -20,31 +20,31 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - name: project build for webpack
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-    - run: yarn install
-    - run: yarn build
+      - name: project build for webpack
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn build
 
-    - name: archive release
-      uses: thedoctor0/zip-release@main
-      with:
-        type: 'zip'
-        filename: 'dist.zip'
-        directory: 'dist'
+      - name: archive release
+        uses: thedoctor0/zip-release@main
+        with:
+          type: 'zip'
+          filename: 'dist.zip'
+          directory: 'dist'
 
-    - name: get-npm-version
-      id: package-version
-      uses: martinbeentjes/npm-get-version-action@master
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
     
-    - name: create release draft
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: ${{ steps.daily-version.outputs.version }}
-        generate_release_notes: true
-        files: dist.zip
+      - name: create release draft
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.daily-version.outputs.version }}
+          generate_release_notes: true
+          files: dist.zip
         
