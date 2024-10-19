@@ -75,6 +75,7 @@ const runBackground = async () => {
     if (!alarm) {
         chrome.alarms.create({ periodInMinutes: 1 })
         chrome.alarms.onAlarm.addListener(() => check())
+        await onAlarm()
         logger.info('register background checker')
     }
 }
