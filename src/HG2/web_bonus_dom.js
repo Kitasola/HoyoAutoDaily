@@ -20,7 +20,7 @@ export class WebBonusDOM {
         const items = await this.getBonusItems()
         const target = items.find((item) => !Array.from(item.childNodes).some((el) => el.className.includes('components-pc-assets-__prize-list_---received')))
         if (target) {
-            logger.info('daily sing in success')
+            logger.info('daily sign in success')
             target.click()
         }
     }

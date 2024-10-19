@@ -20,7 +20,7 @@ export class WebBonusDOM {
         const items = await this.getBonusItems()
         const target = items.find((el) => el.className.includes('sign-wrapper'))
         if (target) {
-            logger.info('daily sing in success')
+            logger.info('daily sign in success')
             target.click()
         }
     }
