@@ -27,6 +27,7 @@ const config = {
         'hour': 1,
         'minutes': 5
     }, // TZ=Asia/Tokyo
+    'alarm': false,
 }
 
 export const getGamesInfo = async () => {
@@ -115,7 +116,7 @@ export const getChecking = async () => {
 
     if ('checking' in data == false) {
         logger.debug('not found checking')
-        await chrome.storage.sync.set({ 'checking': config.lastdate })
+        await chrome.storage.sync.set({ 'checking': config.checking })
         return config.checking
     }
 
@@ -130,4 +131,27 @@ export const onChecking = async () => {
 export const offChecking = async () => {
     await chrome.storage.sync.set({ 'checking': false, })
     logger.debug('change checking')
+}
+
+export const getAlarmStat = async () => {
+    const data = await chrome.storage.sync.get('alarm')
+        .catch(() => { })
+
+    if ('alarm' in data == false) {
+        logger.debug('not found alarm')
+        await chrome.storage.sync.set({ 'alarm': config.alarm })
+        return config.alarm
+    }
+
+    return data.alarm
+};
+
+export const onAlarm = async () => {
+    await chrome.storage.sync.set({ 'alarm': true, })
+    logger.debug('change alarm')
+}
+
+export const offAlarm = async () => {
+    await chrome.storage.sync.set({ 'alarm': false, })
+    logger.debug('change alarm')
 }

@@ -8,6 +8,9 @@ import {
     getChecking,
     onChecking,
     offChecking,
+    getAlarmStat,
+    onAlarm,
+    offAlarm,
 } from './config'
 
 // 定期実行処理
@@ -63,25 +66,17 @@ const check = async () => {
     logger.debug('finish check')
 }
 
-// // conten_script(content.js)からのメッセージ受信
-// chrome.runtime.onMessage.addListener((message, sender) => {
-//     // 完了通知
-//     if (message === 'finish') {
-//         chrome.tabs.query({ url: sender.url }, (tabs) => {
-//             tabs.forEach(tab => {
-//                 chrome.tabs.remove(tab.id)
-//             });
-//         });
-//     }
-// })
-
 // games_info.urlの更新
 updateGameURL()
 
 // chrome.alarmsに定期タスクとして登録
-chrome.alarms.create({ periodInMinutes: 1 })
-chrome.alarms.onAlarm.addListener(() => check())
-logger.info('register background checker')
+const runBackground = async () => {
+    const alarm = await getAlarmStat()
+    if (!alarm) {
+        chrome.alarms.create({ periodInMinutes: 1 })
+        chrome.alarms.onAlarm.addListener(() => check())
+        logger.info('register background checker')
+    }
+}
 
-// 初回起動
-check()
+runBackground()
