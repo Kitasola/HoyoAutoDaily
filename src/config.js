@@ -7,26 +7,29 @@ const config = {
             'name': 'Genshin Impact',
             'enable': false,
             'url': null,
+            'checking': false,
         },
         'HG1': {
             'id': 'HG1',
             'name': 'Hokai Star Rail',
             'enable': false,
             'url': null,
+            'checking': false,
         },
         'HG2': {
             'id': 'HG2',
             'name': 'Zenless Zone Zero',
             'enable': false,
             'url': null,
+            'checking': false,
         },
     },
     'lastdate': new Date(0).toDateString(),
-    'checking': false,
     'check_in_time': {
         'hour': 1,
         'minutes': 5
     }, // TZ=Asia/Tokyo
+    'alarm': false,
 }
 
 export const getGamesInfo = async () => {
@@ -47,6 +50,20 @@ export const changeEnableGame = async (id, enable) => {
     games_info[id].enable = (enable === true)
     await chrome.storage.sync.set({ 'games_info': games_info, })
     logger.debug(`${games_info[id].name}'s info change ${games_info[id].enable}`)
+};
+
+export const onCheckingGame = async (id) => {
+    const games_info = await getGamesInfo()
+    games_info[id].checking = true
+    await chrome.storage.sync.set({ 'games_info': games_info, })
+    logger.debug(`${games_info[id].name}'s checking on`)
+};
+
+export const offCheckingGame = async (id) => {
+    const games_info = await getGamesInfo()
+    games_info[id].checking = false
+    await chrome.storage.sync.set({ 'games_info': games_info, })
+    logger.debug(`${games_info[id].name}'s checking off`)
 };
 
 export const getLastdate = async () => {
@@ -109,25 +126,25 @@ export const updateGameURL = async () => {
     logger.debug(`update games_info url`)
 }
 
-export const getChecking = async () => {
-    const data = await chrome.storage.sync.get('checking')
+export const getAlarmStat = async () => {
+    const data = await chrome.storage.sync.get('alarm')
         .catch(() => { })
 
-    if ('checking' in data == false) {
-        logger.debug('not found checking')
-        await chrome.storage.sync.set({ 'checking': config.lastdate })
-        return config.checking
+    if ('alarm' in data == false) {
+        logger.debug('not found alarm')
+        await chrome.storage.sync.set({ 'alarm': config.alarm })
+        return config.alarm
     }
 
-    return data.checking
+    return data.alarm
 };
 
-export const onChecking = async () => {
-    await chrome.storage.sync.set({ 'checking': true, })
-    logger.debug('change checking')
+export const onAlarm = async () => {
+    await chrome.storage.sync.set({ 'alarm': true, })
+    logger.debug('change alarm')
 }
 
-export const offChecking = async () => {
-    await chrome.storage.sync.set({ 'checking': false, })
-    logger.debug('change checking')
+export const offAlarm = async () => {
+    await chrome.storage.sync.set({ 'alarm': false, })
+    logger.debug('change alarm')
 }
