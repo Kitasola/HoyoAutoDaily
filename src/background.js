@@ -42,11 +42,11 @@ const check = async () => {
             await updateLastdate()
             chrome.tabs.create({
                 url: game.url,
-                active: false,
+                // active: false,
             })
+            logger.debug(`open ${game.id} web bonus page`)
             // Hoyoverse API制限の回避
             await new Promise((resolve) => setTimeout(resolve, 10000))
-            logger.debug(`open ${game.id} web bonus page`)
         } else if (game.checking) {
             // 上記チェックイン処理の後始末
             if (game.enable && game.url != null) {
@@ -63,8 +63,8 @@ const check = async () => {
                     logger.error(`${game.id} error: ${error}`)
                     continue
                 }
+                logger.debug(`close ${game.id} web bonus page`)
             }
-            logger.debug(`close ${game.id} web bonus page`)
         }
     }
     logger.debug('finish check')
