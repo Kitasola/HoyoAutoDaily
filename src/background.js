@@ -3,7 +3,7 @@ import {
     getLastdate,
     getCheckInTime,
     updateLastdate,
-    updateGameURL,
+    updateGamePageURL,
     getGamesInfo,
     onCheckingGame,
     offCheckingGame,
@@ -26,7 +26,7 @@ const check = async () => {
     const games_info = await getGamesInfo()
     for (const game of Object.values(games_info)) {
         // 有効ゲームのみ処理
-        if (!game.enable || game.url === null) {
+        if (!game.enable || game.page_url === null) {
             continue
         }
 
@@ -41,17 +41,17 @@ const check = async () => {
             await onCheckingGame(game.id)
             await updateLastdate()
             chrome.tabs.create({
-                url: game.url,
-                // active: false,
+                url: game.page_url,
+                active: false,
             })
             logger.debug(`open ${game.id} web bonus page`)
             // Hoyoverse API制限の回避
             await new Promise((resolve) => setTimeout(resolve, 10000))
         } else if (game.checking) {
             // 上記チェックイン処理の後始末
-            if (game.enable && game.url != null) {
+            if (game.enable && game.page_url != null) {
                 try {
-                    chrome.tabs.query({ url: game.url }, (tabs) => {
+                    chrome.tabs.query({ url: game.page_url }, (tabs) => {
                         tabs.forEach(tab => {
                             chrome.tabs.remove(tab.id)
                         });
@@ -71,7 +71,7 @@ const check = async () => {
 }
 
 // games_info.urlの更新
-updateGameURL()
+updateGamePageURL()
 
 // chrome.alarmsに定期タスクとして登録
 chrome.alarms.create({ periodInMinutes: 1 })

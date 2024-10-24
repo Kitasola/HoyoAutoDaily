@@ -1,6 +1,6 @@
 {
   "name": "hoyo-auto-daily",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "license": "MIT",
   "scripts": {
     "debug": "webpack --config webpack.dev.js",
